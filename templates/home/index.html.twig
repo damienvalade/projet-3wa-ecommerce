@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Nouveaux produits</h1>
+        <br>
+        <br>
+        {% for article in articles %}
+
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card">
+                    <img class="card-img-top" alt="image cap" /> 
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{article.name}}</h5>
+                      
+                        
+                        <p class="card-text"> {{ article.desc }}
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <p class="col-2"> {{article.origin }} </p>
+                                    <p class="col"> {{ article.price }}€</p>
+                                    
+                                    </div>
+                            </li>
+                            <li class="list-group-item float-right">
+                                <a href="#" class="btn btn-primary">Voir l'article</a>
+                                <a href="#" class="btn btn-light btn-icon"><i class="fas fa-cart-plus"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
