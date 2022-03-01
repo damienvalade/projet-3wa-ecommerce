@@ -42,7 +42,7 @@ class VendorRegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_vendor');
+            return $this->redirectToRoute('vendor');
         }
 
         return $this->render('vendor/registration/register.html.twig', [
