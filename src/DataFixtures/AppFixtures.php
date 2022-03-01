@@ -5,7 +5,10 @@ namespace App\DataFixtures;
 use App\Entity\Article;
 use App\Entity\Buyer;
 use App\Entity\Category;
+use App\Entity\CollectionPoint;
 use App\Entity\Company;
+use App\Entity\Feedback;
+use App\Entity\Note;
 use App\Entity\User;
 use App\Entity\Vendor;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -21,6 +24,8 @@ class AppFixtures extends Fixture
         $companies = [];
         $categories = [];
         $vendors = [];
+        $buyers = [];
+        $articles = [];
 
         for ($i = 0; $i <= 2; $i++) {
             $company = new Company();
@@ -37,6 +42,7 @@ class AppFixtures extends Fixture
 
 
         for ($i = 0; $i <= 4; $i++) {
+            //BUYERS
             $buyer =  new Buyer();
 
             $buyer->setEmail($faker->email());
@@ -45,6 +51,10 @@ class AppFixtures extends Fixture
             $buyer->setPassword($faker->password());
             $buyer->setProfilePicture($faker->imageUrl());
 
+            $buyers[] = $buyer;
+
+
+            //VENDORS
             $vendor =  new Vendor();
 
             $vendor->setEmail($faker->email());
@@ -55,18 +65,27 @@ class AppFixtures extends Fixture
             $vendor->setCompany($faker->randomElement($companies));
 
             $vendors[] = $vendor;
-        }
 
-        for ($i = 0; $i <= 4; $i++) {
+
+            // CATEGORIES
             $category = new Category();
 
             $category->setName($faker->text(8));
             $category->setDescription($faker->text(150));
 
             $categories[] = $category;
+
+            //COLLECTIONPOINT
+            $collectionPoint = new CollectionPoint();
+
+            $collectionPoint->setAddress($faker->address());
+            $collectionPoint->setContact($faker->phoneNumber());
+            $collectionPoint->setDate($faker->dateTime());
+            $collectionPoint->setTitle($faker->title());
         }
 
         for ($i = 0; $i <= 15; $i++) {
+            //ARTICLES
             $article = new Article();
 
             $article->setName($faker->text(8));
@@ -76,6 +95,24 @@ class AppFixtures extends Fixture
             $article->setPhoto($faker->imageUrl());
             $article->setQuantity($faker->numberBetween(1, 200));
             $article->setVendor($faker->randomElement($vendors));
+
+            $articles[] = $article;
+        }
+
+        for ($i = 0; $i <= 20; $i ++) {
+            //FEEDBACK
+            $feedback = new Feedback();
+
+            $feedback->setArticle($faker->randomElement($articles));
+            $feedback->setBuyer($faker->randomElement($buyers));
+            $feedback->setComment($faker->text(150));
+
+            //NOTE
+            $note = new Note();
+
+            $note->setBuyer($faker->randomElement($buyers));
+            $note->setVendor($faker->randomElement($vendors));
+            $note->setNote($faker->numberBetween(0, 5));
         }
 
         $manager->flush();
