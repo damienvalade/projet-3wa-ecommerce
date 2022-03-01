@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use App\DBAL\Types\PaymentType;
 use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -28,7 +30,8 @@ class Order
     #[ORM\Column(type: 'boolean')]
     private $status;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[DoctrineAssert\EnumType(entity: PaymentType::class)]
+    #[ORM\Column(name: '`type`', type: 'PaymentType', unique: true, nullable: false)]
     private $paymentMethod;
 
     #[ORM\Column(type: 'datetime_immutable')]
@@ -105,6 +108,8 @@ class Order
 
     public function setPaymentMethod(string $paymentMethod): self
     {
+        PaymentType::assertValidChoice($paymentMethod);
+
         $this->paymentMethod = $paymentMethod;
 
         return $this;
