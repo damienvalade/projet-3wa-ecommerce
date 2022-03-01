@@ -31,7 +31,7 @@ class Order
     private $status;
 
     #[DoctrineAssert\EnumType(entity: PaymentType::class)]
-    #[ORM\Column(name: '`type`', type: 'PaymentType', unique: true, nullable: false)]
+    #[ORM\Column(name: '`type`', type: 'PaymentType', nullable: false)]
     private $paymentMethod;
 
     #[ORM\Column(type: 'datetime_immutable')]
