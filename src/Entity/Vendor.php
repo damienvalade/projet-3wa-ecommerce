@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: VendorRepository::class)]
-class Vendor
+class Vendor extends User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -32,6 +32,7 @@ class Vendor
         $this->notes = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->setRoles([USER::ROLE_VENDOR]);
     }
 
     public function getId(): ?int
