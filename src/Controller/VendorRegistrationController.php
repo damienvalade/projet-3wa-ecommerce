@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Buyer;
 use App\Entity\User;
+use App\Entity\Vendor;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,37 +13,39 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/buyer')]
-class BuyerRegistrationController extends AbstractController
+#[Route('/vendor')]
+class VendorRegistrationController extends AbstractController
 {
-    #[Route('/register', name: 'app_register')]
+    #[Route('/register', name: 'vendor_register')]
     public function register(
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface $entityManager
     ): Response {
-        $buyer = new Buyer();
-        $form = $this->createForm(RegistrationFormType::class, $buyer);
+        $vendor = new Vendor();
+        $form = $this->createForm(RegistrationFormType::class, $vendor, [
+            'data_class' => Vendor::class,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $buyer->setPassword(
+            $vendor->setPassword(
                 $userPasswordHasher->hashPassword(
-                    $buyer,
+                    $vendor,
                     $form->get('plainPassword')->getData()
                 )
             );
 
-            $buyer->setProfilePicture('');
-            $entityManager->persist($buyer);
+            $vendor->setProfilePicture('');
+            $entityManager->persist($vendor);
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_buyer');
+            return $this->redirectToRoute('app_vendor');
         }
 
-        return $this->render('buyer/registration/register.html.twig', [
+        return $this->render('vendor/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
