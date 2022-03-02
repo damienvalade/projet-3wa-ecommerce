@@ -18,7 +18,7 @@ class CartArticle
     private Article $article;
 
     #[ORM\ManyToOne(targetEntity: Cart::class, inversedBy: 'cartArticles')]
-    private ?Cart $cart;
+    private ?Cart $Cart;
 
     #[ORM\Column(type: 'integer')]
     private int $quantity;
