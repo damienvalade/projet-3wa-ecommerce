@@ -13,26 +13,35 @@ class Vendor extends User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'vendors')]
-    private $company;
+    private ?Company $company;
 
+    /**
+     * @var ArrayCollection<Note>
+     */
     #[ORM\OneToMany(mappedBy: 'vendor', targetEntity: Note::class)]
-    private $notes;
+    private Collection $notes;
 
+    /**
+     * @var ArrayCollection<Article>
+     */
     #[ORM\OneToMany(mappedBy: 'vendor', targetEntity: Article::class)]
-    private $articles;
+    private Collection $articles;
 
+    /**
+     * @var ArrayCollection<Order>
+     */
     #[ORM\OneToMany(mappedBy: 'vendor', targetEntity: Order::class)]
-    private $orders;
+    private Collection $orders;
 
     public function __construct()
     {
         $this->notes = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->orders = new ArrayCollection();
-        $this->setRoles([USER::ROLE_VENDOR]);
+        $this->setRoles([User::ROLE_VENDOR]);
     }
 
     public function getId(): ?int

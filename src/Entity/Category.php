@@ -13,16 +13,19 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private string $name;
 
     #[ORM\Column(type: 'text')]
-    private $description;
+    private string $description;
 
+    /**
+     * @var ArrayCollection<Article>
+     */
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Article::class)]
-    private $articles;
+    private Collection $articles;
 
     public function __construct()
     {

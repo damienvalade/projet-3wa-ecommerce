@@ -13,23 +13,32 @@ class Buyer extends User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
+    /**
+     * @var ArrayCollection<Note>
+     */
     #[ORM\OneToMany(mappedBy: 'buyer', targetEntity: Note::class)]
-    private $notes;
+    private Collection $notes;
 
+    /**
+     * @var ArrayCollection<Feedback>
+     */
     #[ORM\OneToMany(mappedBy: 'buyer', targetEntity: Feedback::class)]
-    private $feedback;
+    private Collection $feedback;
 
+    /**
+     * @var ArrayCollection<Order>
+     */
     #[ORM\OneToMany(mappedBy: 'buyer', targetEntity: Order::class)]
-    private $orders;
+    private Collection $orders;
 
     public function __construct()
     {
         $this->notes = new ArrayCollection();
         $this->feedback = new ArrayCollection();
         $this->orders = new ArrayCollection();
-        $this->setRoles([USER::ROLE_BUYER]);
+        $this->setRoles([User::ROLE_BUYER]);
     }
 
     public function getId(): ?int

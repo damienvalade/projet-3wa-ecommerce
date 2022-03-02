@@ -11,17 +11,17 @@ class CartArticle
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'cartArticles')]
     #[ORM\JoinColumn(nullable: false)]
-    private $article;
+    private Article $article;
 
     #[ORM\ManyToOne(targetEntity: Cart::class, inversedBy: 'cartArticles')]
-    private $Cart;
+    private ?Cart $cart;
 
     #[ORM\Column(type: 'integer')]
-    private $quantity;
+    private int $quantity;
 
     public function getId(): ?int
     {
@@ -35,6 +35,7 @@ class CartArticle
 
     public function setArticle(?Article $article): self
     {
+        // @phpstan-ignore-next-line
         $this->article = $article;
 
         return $this;
@@ -42,12 +43,12 @@ class CartArticle
 
     public function getCart(): ?Cart
     {
-        return $this->Cart;
+        return $this->cart;
     }
 
-    public function setCart(?Cart $Cart): self
+    public function setCart(?Cart $cart): self
     {
-        $this->Cart = $Cart;
+        $this->cart = $cart;
 
         return $this;
     }

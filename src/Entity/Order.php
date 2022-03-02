@@ -16,32 +16,35 @@ class Order
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\ManyToOne(targetEntity: Buyer::class, inversedBy: 'orders')]
-    private $buyer;
+    private ?Buyer $buyer;
 
     #[ORM\ManyToOne(targetEntity: Vendor::class, inversedBy: 'orders')]
-    private $vendor;
+    private ?Vendor $vendor;
 
     #[ORM\Column(type: 'integer')]
-    private $totalPrice;
+    private int $totalPrice;
 
     #[ORM\Column(type: 'boolean')]
-    private $status;
+    private bool $status;
 
     #[DoctrineAssert\EnumType(entity: PaymentType::class)]
     #[ORM\Column(name: '`type`', type: 'PaymentType', nullable: false)]
-    private $paymentMethod;
+    private ?string $paymentMethod;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private $createdAt;
+    private \DateTimeImmutable $createdAt;
 
     #[ORM\ManyToOne(targetEntity: CollectionPoint::class, inversedBy: 'orders')]
-    private $collectionPoint;
+    private ?CollectionPoint $collectionPoint;
 
+    /**
+     * @var ArrayCollection<OrderArticle>
+     */
     #[ORM\OneToMany(mappedBy: 'customerOrder', targetEntity: OrderArticle::class)]
-    private $orderArticles;
+    private Collection $orderArticles;
 
     public function __construct()
     {
