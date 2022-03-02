@@ -13,22 +13,25 @@ class CollectionPoint
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'text')]
-    private $address;
+    private string $address;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $title;
+    private string $title;
 
     #[ORM\Column(type: 'datetime')]
-    private $date;
+    private \DateTimeInterface $date;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $contact;
+    private string $contact;
 
+    /**
+     * @var ArrayCollection<Order>
+     */
     #[ORM\OneToMany(mappedBy: 'collectionPoint', targetEntity: Order::class)]
-    private $orders;
+    private Collection $orders;
 
     public function __construct()
     {

@@ -43,7 +43,7 @@ class AppFixtures extends Fixture
             $company->setAddress($faker->address());
             $company->setIban($faker->iban());
             $company->setDescription($faker->text(150));
-            $company->setSiret($faker->numberBetween(1111111, 9999999));
+            $company->setSiret((string)$faker->numberBetween(1111111, 9999999));
 
             $manager->persist($company);
 

@@ -13,14 +13,17 @@ class Cart
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\OneToOne(targetEntity: Buyer::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private $buyer;
+    private Buyer $buyer;
 
+    /**
+     * @var ArrayCollection<CartArticle>
+     */
     #[ORM\OneToMany(mappedBy: 'Cart', targetEntity: CartArticle::class)]
-    private $cartArticles;
+    private Collection $cartArticles;
 
     public function __construct()
     {
