@@ -17,6 +17,8 @@
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+
+         
         {% endblock %}
     </head>
 
@@ -54,6 +56,9 @@
                     <li class="nav-item">
                     <a class="nav-link" href="#">Projects</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('company_list') }}">Companies</a>
+                    </li>
                 </ul>
                 <!-- Left links -->
                 </div>
@@ -62,10 +67,9 @@
                 <!-- Right elements -->
                 <div class="d-flex align-items-center">
                 <!-- Icon -->
-                <a class="text-reset me-3" href="#">
+                <a class="text-reset me-3" href="{{ path('show_cart') }}">
                     <i class="fas fa-shopping-cart"></i>
                 </a>
-                    <form class="d-flex input-group w-auto">
                     <input
                         type="search"
                         class="form-control rounded"
@@ -85,5 +89,18 @@
     </header>
     <body>
         {% block body %}{% endblock %}
+           <script>
+                function addArticle(id) {
+                    const url = `cart/add/${id}`
+                    console.log(url)
+                    fetch(url)
+                    .then(reponse => {
+                        console.log(reponse);
+                    })
+                    .catch(error => {
+                        console.error(`Error when removing: ${error}`);
+                    });
+                }
+            </script>
     </body>
 </html>

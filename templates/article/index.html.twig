@@ -4,17 +4,88 @@
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .cadre {    border: 1px solid #000;
+  border-radius: 100%;
+  height: 100px;
+  width: 100px;
+  margin: auto;
+  display: inline-block;
+   }
+    .reduce{ width:80%}
+    .left{
+        position: absolute;
+        left: 5%;
+    }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<br>
+<br>
+<br>
+<div class="container">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/srv/app/src/Controller/ArticleController.php'|file_link(0) }}">src/Controller/ArticleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/srv/app/templates/article/index.html.twig'|file_link(0) }}">templates/article/index.html.twig</a></code></li>
-    </ul>
+        <aside class="col-2 left">
+            
+            <div class="card reduce">
+                <br><br>
+                <img class="card-img-top cadre " height="100%" src="{{article.vendor.profilePicture}}"alt="image cap" /> 
+             
+                            <div class="card-body">
+                            
+                                  <h5 class="card-title">{{article.vendor.name}}</h5>
+             
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                    
+                                    </li>
+                                    <li class="list-group-item float-right">
+                                        <a href="{{ path('article_show', {'id':article.id})}}" class="btn btn-primary">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+            </div>
+    </aside>
+    <div class="container">
+        <div class="card">
+            <h1 class="card-title text-center">{{article.name}}</h1>
+            <img  width="80%" style="margin:auto;"src="{{article.photo}}" />
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  
+            
+                    <div class="row">
+                    <div class="col-1 card" >
+                        <i class="fas fa-list">  {{article.category.name}}</i>
+                    </div>  
+                     <div class="col-1 card">
+                        <i class="fas fa-map-marker-alt">  {{article.origin}}</i>
+                    </div>     
+                    </div>
+                    {{article.description}}
+                </li>
+                <li class="list-group-item ">
+                    <div class ="row">
+                    <h3 class="col text-center"> {{article.price}}€ </h3>
+                    <a  onclick="addArticle({{article.id}})" class="btn btn-primary float-right col-3">Ajouter au panier</a>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+        {% for feedback in article.feedback %}
+            <div class="card">
+                    <div class="d-flex justify-content-center py-2">
+                        <div class="second py-2 px-2"> <span class="text1">{{feedback.comment}}</span>
+                            <div class="d-flex justify-content-between py-1 pt-2">
+                                <div><img src="{{feedback.buyer.profilePicture}}" width="18"><span class="text2">{{feedback.buyer.name}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    </div>
+  
 </div>
 {% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for company in companies %}
+        <div>
+            <a href="{{ path('company_show', {id: company.id}) }}"></a>{{ company.title }}
+        </div>
+    {% else %}
+        <div>
+            No companies
+        </div>
+    {% endfor %}
+{% endblock %}
