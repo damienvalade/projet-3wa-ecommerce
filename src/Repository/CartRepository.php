@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Buyer;
 use App\Entity\Cart;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -45,22 +46,20 @@ class CartRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Cart[] Returns an array of Cart objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+      * @return Cart[] Returns an array of Cart objects
+     */
+
+    public function findUserCart(Buyer $buyer)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('c.buyer = :val')
+            ->setParameter('val', $buyer)
             ->getQuery()
-            ->getResult()
+            ->getOneOrNullResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Cart
