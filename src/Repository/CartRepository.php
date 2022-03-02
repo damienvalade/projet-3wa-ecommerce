@@ -46,11 +46,7 @@ class CartRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-      * @return Cart[] Returns an array of Cart objects
-     */
-
-    public function findUserCart(Buyer $buyer)
+    public function findUserCart(Buyer $buyer): ?Cart
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.buyer = :val')
@@ -59,7 +55,7 @@ class CartRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    
+
 
     /*
     public function findOneBySomeField($value): ?Cart

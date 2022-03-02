@@ -21,8 +21,8 @@ class CartController extends AbstractController
     public function index(CartRepository $cartRepository, EntityManagerInterface $manager): Response
     {
         $cart = $this->findCart($cartRepository, $manager);
-     
-        
+
+
         return $this->render('cart/index.html.twig', [
             'controller_name' => 'CartController',
             'cart' => $cart,
@@ -32,12 +32,12 @@ class CartController extends AbstractController
 
     #[Route('/cart/add/{id}', name: 'add_cart')]
     public function addArticle(
-        Article $article, 
-        CartRepository $cartRepository, 
-        EntityManagerInterface $manager, 
+        Article $article,
+        CartRepository $cartRepository,
+        EntityManagerInterface $manager,
         CartArticleRepository $cartArticleRepository): JsonResponse
     {
-        
+
         $cart = $this->findCart($cartRepository, $manager);
 
         $cartArticle = $cartArticleRepository->findArticleForCart($article,$cart);
@@ -46,7 +46,7 @@ class CartController extends AbstractController
             $cartArticle = CartArticle::wadCreated($article, $cart);
 
             $cart->addCartArticle($cartArticle);
-            
+
 
         } else {
             $cartArticle->setQuantity($cartArticle->getQuantity()+1);
@@ -58,6 +58,7 @@ class CartController extends AbstractController
 
     protected function findCart(CartRepository $cartRepository, EntityManagerInterface $manager): Cart
     {
+        /** @var Buyer $user */
         $user = $this->getUser();
         $cart = $cartRepository->findUserCart($user);
         if (!$cart) {
@@ -72,7 +73,7 @@ class CartController extends AbstractController
     {
         $cart = new Cart();
         $cart->setBuyer($user);
-  
+
         return $cart;
     }
 }
