@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+ <div class="container">
+        <br><br><br>
+   
+    <div class="card">
+        <h1 class="text-center"> Mon panier</h1>
+            {% for article in cart.cartArticles %}
+                <div class="card">
+                    {{article.article.name}} {{article.quantity}}
+                </div>
+            {% endfor %}
+    </div>
+ </div>
+{% endblock %}
