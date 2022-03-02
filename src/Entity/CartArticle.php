@@ -22,6 +22,17 @@ class CartArticle
 
     #[ORM\Column(type: 'integer')]
     private $quantity;
+    
+    public static function wadCreated(Article $article,Cart $cart): self
+    {
+        $cartArticle = new self;
+        $cartArticle->setArticle($article);
+        $cartArticle->setCart($cart);
+        $cartArticle->setQuantity(1);
+
+        return $cartArticle;
+
+    }
 
     public function getId(): ?int
     {

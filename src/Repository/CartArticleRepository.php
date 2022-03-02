@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Article;
+use App\Entity\Cart;
 use App\Entity\CartArticle;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -45,22 +47,19 @@ class CartArticleRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return CartArticle[] Returns an array of CartArticle objects
-    //  */
-    /*
-    public function findByExampleField($value)
+ 
+    public function findArticleForCart(Article $article, Cart $cart): ?CartArticle
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('c.article = :article')
+            ->andWhere('c.Cart = :cart')
+            ->setParameter('article', $article)
+            ->setParameter('cart', $cart)
             ->getQuery()
-            ->getResult()
+            ->getOneOrNullResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?CartArticle
