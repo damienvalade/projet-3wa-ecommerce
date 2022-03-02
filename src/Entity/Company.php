@@ -157,7 +157,7 @@ class Company
     {
         // check if the name is actually a fake name
         if (strtolower($this->getName()) === self::FORBIDDEN_NAME) {
-            $context->buildViolation("You cannot name it {self::FORBIDDEN_NAME}")
+            $context->buildViolation("You cannot name it '{$this->getName()}'. It's us...")
                 ->atPath('name')
                 ->addViolation();
         }
