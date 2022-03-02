@@ -11,16 +11,16 @@ class OrderArticle
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'orderArticles')]
-    private $article;
+    private ?Article $article;
 
     #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'orderArticles')]
-    private $customerOrder;
+    private ?Order $customerOrder;
 
     #[ORM\Column(type: 'integer')]
-    private $quantity;
+    private int $quantity;
 
     public function getId(): ?int
     {
