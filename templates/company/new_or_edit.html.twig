@@ -2,7 +2,11 @@
 
 {% block body %}
     <div class="container">
-        <h1>Ajouter une companie</h1>
+        {% if company.id %}
+            <h1>Modifier la companie</h1>
+        {% else %}
+            <h1>Ajouter une companie</h1>
+        {% endif %}
 
         {{ form(form) }}
     </div>

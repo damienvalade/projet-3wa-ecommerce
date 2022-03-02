@@ -6,11 +6,13 @@ use App\Entity\Company;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/company')]
 class CompanyController extends AbstractController
 {
     public function __construct(
@@ -19,7 +21,7 @@ class CompanyController extends AbstractController
     ) {
     }
 
-    #[Route('/company/list', name: 'company_list', methods: ['GET'])]
+    #[Route('/list', name: 'company_list', methods: ['GET'])]
     public function list(): Response {
         $companies = $this->companyRepository->findAll();
 
@@ -28,8 +30,8 @@ class CompanyController extends AbstractController
         ]);
     }
 
-    #[Route('/company/new', name: 'company_new')]
-    #[Route('/company/{id}/edit', name: 'company_edit', methods: ['POST', 'GET'])]
+    #[Route('/new', name: 'company_new')]
+    #[Route('/{id}/edit', name: 'company_edit', methods: ['POST', 'GET'])]
     public function newOrEdit(
         Request $request,
         Company|null $company = null
@@ -56,7 +58,7 @@ class CompanyController extends AbstractController
         ]);
     }
 
-    #[Route('/company/{id}/show', name: 'company_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'company_show', methods: ['GET'])]
     public function show(
         Company $company
     ): Response {
