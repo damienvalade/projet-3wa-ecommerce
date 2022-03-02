@@ -43,7 +43,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 8.1
           extensions: composer:v2, flex, pcov
           coverage: pcov
 
@@ -84,7 +84,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 8.1
 
       - name: Deploy main
         uses: deployphp/action@v1
