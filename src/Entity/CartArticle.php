@@ -18,11 +18,11 @@ class CartArticle
     private Article $article;
 
     #[ORM\ManyToOne(targetEntity: Cart::class, inversedBy: 'cartArticles')]
-    private ?Cart $cart;
+    private ?Cart $Cart;
 
     #[ORM\Column(type: 'integer')]
     private int $quantity;
-    
+
     public static function wadCreated(Article $article,Cart $cart): self
     {
         $cartArticle = new self;
@@ -54,12 +54,12 @@ class CartArticle
 
     public function getCart(): ?Cart
     {
-        return $this->cart;
+        return $this->Cart;
     }
 
-    public function setCart(?Cart $cart): self
+    public function setCart(?Cart $Cart): self
     {
-        $this->cart = $cart;
+        $this->Cart = $Cart;
 
         return $this;
     }

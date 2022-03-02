@@ -3,7 +3,7 @@
 {% block body %}
     {% for company in companies %}
         <div>
-            <a href="{{ path('company_show', {id: company.id}) }}"></a>{{ company.title }}
+            <a href="{{ path('company_show', {id: company.id}) }}"></a>{{ company.name }}
         </div>
     {% else %}
         <div>
