@@ -2,6 +2,8 @@
 
 {% block body %}
     <div class="container">
+        <a class="btn btn-primary" href="{{ path('company_new') }}">New company</a>
+
         {% for company in companies %}
             <div>
                 <a href="{{ path('company_show', {id: company.id}) }}">{{ company.name }}</a>
