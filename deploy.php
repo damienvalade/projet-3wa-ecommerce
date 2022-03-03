@@ -30,6 +30,7 @@ host('dev')
     ->set('composer_options', '--verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader')
     ->set('ssh_multiplexing', true)
     ->set('environment', 'dev')
+    ->set('git_ssh_command', 'ssh')
 ;
 
 // Run migrations before enabling the release
