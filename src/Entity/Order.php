@@ -7,7 +7,6 @@ use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Fresh\DoctrineEnumBundle\Validator\Constraints as DoctrineAssert;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -16,7 +15,7 @@ class Order
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Buyer::class, inversedBy: 'orders')]
     private ?Buyer $buyer;
@@ -30,7 +29,9 @@ class Order
     #[ORM\Column(type: 'boolean')]
     private bool $status;
 
-    #[DoctrineAssert\EnumType(entity: PaymentType::class)]
+    /**
+     * @DoctrineAssert\Enum(entity=PaymentType::class)
+     */
     #[ORM\Column(name: '`type`', type: 'PaymentType', nullable: false)]
     private ?string $paymentMethod;
 

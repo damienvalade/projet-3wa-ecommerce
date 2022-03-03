@@ -17,7 +17,7 @@ class Company
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $name;
@@ -156,7 +156,7 @@ class Company
     }
 
     #[Assert\Callback]
-    public function validateName(ExecutionContextInterface $context, array $payload): void
+    public function validateName(ExecutionContextInterface $context, ?array $payload): void
     {
         // check if the name is actually a fake name
         if ($this->getName() && strtolower($this->getName()) === self::FORBIDDEN_NAME) {

@@ -11,7 +11,7 @@ class CartArticle
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'cartArticles')]
     #[ORM\JoinColumn(nullable: false)]
@@ -23,7 +23,7 @@ class CartArticle
     #[ORM\Column(type: 'integer')]
     private int $quantity;
 
-    public static function wadCreated(Article $article,Cart $cart): self
+    public static function wadCreated(?Article $article,Cart $cart): self
     {
         $cartArticle = new self;
         $cartArticle->setArticle($article);
