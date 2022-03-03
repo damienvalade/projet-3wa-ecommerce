@@ -11,19 +11,19 @@ class Feedback
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\ManyToOne(targetEntity: Buyer::class, inversedBy: 'feedback')]
-    private $buyer;
+    private ?Buyer $buyer;
 
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'feedback')]
-    private $article;
+    private ?Article $article;
 
     #[ORM\Column(type: 'text')]
-    private $comment;
+    private string $comment;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private $createdAt;
+    private \DateTimeImmutable $createdAt;
 
     public function getId(): ?int
     {

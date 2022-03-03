@@ -11,19 +11,19 @@ class Note
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'smallint')]
-    private $note;
+    private int $note;
 
     #[ORM\Column(type: 'datetime')]
-    private $createdAd;
+    private \DateTimeInterface $createdAd;
 
     #[ORM\ManyToOne(targetEntity: Buyer::class, inversedBy: 'notes')]
-    private $buyer;
+    private ?Buyer $buyer;
 
     #[ORM\ManyToOne(targetEntity: Vendor::class, inversedBy: 'notes')]
-    private $vendor;
+    private ?Vendor $vendor;
 
     public function getId(): ?int
     {

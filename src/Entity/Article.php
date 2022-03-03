@@ -13,40 +13,49 @@ class Article
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private string $name;
 
     #[ORM\Column(type: 'text')]
-    private $description;
+    private string $description;
 
     #[ORM\Column(type: 'integer')]
-    private $quantity;
+    private int $quantity;
 
     #[ORM\Column(type: 'integer')]
-    private $price;
+    private int $price;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $photo;
+    private ?string $photo;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $origin;
+    private ?string $origin;
 
     #[ORM\ManyToOne(targetEntity: Vendor::class, inversedBy: 'articles')]
-    private $vendor;
+    private ?Vendor $vendor;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'articles')]
-    private $category;
+    private ?Category $category;
 
+    /**
+     * @var ArrayCollection<Feedback>
+     */
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Feedback::class)]
-    private $feedback;
+    private Collection $feedback;
 
+    /**
+     * @var ArrayCollection<OrderArticle>
+     */
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: OrderArticle::class)]
-    private $orderArticles;
+    private Collection $orderArticles;
 
+    /**
+     * @var ArrayCollection<CartArticle>
+     */
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: CartArticle::class)]
-    private $cartArticles;
+    private Collection $cartArticles;
 
     public function __construct()
     {

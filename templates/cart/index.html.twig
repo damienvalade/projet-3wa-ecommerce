@@ -5,10 +5,10 @@
 {% block body %}
  <div class="container">
         <br><br><br>
-   
+
     <div class="card">
         <h1 class="text-center"> Mon panier</h1>
-            {% for article in cart.cartArticles %}
+            {% for article in articles %}
                 <div class="card">
                     {{article.article.name}} {{article.quantity}}
                 </div>
