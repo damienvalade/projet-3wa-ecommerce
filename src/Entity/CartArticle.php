@@ -23,7 +23,7 @@ class CartArticle
     #[ORM\Column(type: 'integer')]
     private int $quantity;
 
-    public static function wadCreated(Article $article,Cart $cart): self
+    public static function wadCreated(?Article $article,Cart $cart): self
     {
         $cartArticle = new self;
         $cartArticle->setArticle($article);

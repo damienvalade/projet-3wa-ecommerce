@@ -47,8 +47,8 @@ class CartArticleRepository extends ServiceEntityRepository
         }
     }
 
- 
-    public function findArticleForCart(Article $article, Cart $cart): ?CartArticle
+
+    public function findArticleForCart(?Article $article, Cart $cart): ?CartArticle
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.article = :article')
@@ -59,7 +59,7 @@ class CartArticleRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    
+
 
     /*
     public function findOneBySomeField($value): ?CartArticle

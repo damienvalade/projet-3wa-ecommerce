@@ -60,10 +60,11 @@ class CompanyController extends AbstractController
 
     #[Route('/{id}', name: 'company_show', methods: ['GET'])]
     public function show(
-        Company $company
+        int $id,
+        CompanyRepository $companyRepository
     ): Response {
         return $this->render('company/show.html.twig', [
-            'company' => $company,
+            'company' => $companyRepository->findOneBy(['id' => $id]),
         ]);
     }
 }

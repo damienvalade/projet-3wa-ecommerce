@@ -6,6 +6,7 @@ use App\Entity\Buyer;
 use App\Entity\Cart;
 use App\Entity\Article;
 use App\Entity\CartArticle;
+use App\Repository\ArticleRepository;
 use App\Repository\CartArticleRepository;
 use App\Repository\CartRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,13 +31,15 @@ class CartController extends AbstractController
 
     #[Route('/cart/add/{id}', name: 'add_cart')]
     public function addArticle(
-        Article $article,
+        int $id,
+        ArticleRepository $articleRepository,
         CartRepository $cartRepository,
         EntityManagerInterface $manager,
         CartArticleRepository $cartArticleRepository): JsonResponse
     {
-
         $cart = $this->findCart($cartRepository, $manager);
+
+        $article = $articleRepository->findOneBy(['id' => $id]);
 
         $cartArticle = $cartArticleRepository->findArticleForCart($article,$cart);
 

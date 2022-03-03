@@ -156,7 +156,7 @@ class Company
     }
 
     #[Assert\Callback]
-    public function validateName(ExecutionContextInterface $context, array $payload): void
+    public function validateName(ExecutionContextInterface $context, ?array $payload): void
     {
         // check if the name is actually a fake name
         if ($this->getName() && strtolower($this->getName()) === self::FORBIDDEN_NAME) {
