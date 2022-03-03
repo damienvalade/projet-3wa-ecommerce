@@ -13,7 +13,7 @@ class Article
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $name;
@@ -34,7 +34,7 @@ class Article
     private ?string $origin;
 
     #[ORM\ManyToOne(targetEntity: Vendor::class, inversedBy: 'articles')]
-    private ?Vendor $vendor;
+    private ?Vendor $vendor = null;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'articles')]
     private ?Category $category;

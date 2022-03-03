@@ -11,7 +11,7 @@ class Feedback
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Buyer::class, inversedBy: 'feedback')]
     private ?Buyer $buyer;

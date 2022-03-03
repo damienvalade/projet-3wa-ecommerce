@@ -22,19 +22,20 @@ set('writable_dirs', [
     'var'
 ]);
 
+set('shared_files', [
+    '.htaccess'
+]);
+
 host('dev')
     ->set('hostname', '51.254.32.246')
     ->set('remote_user', 'damienv')
     ->set('deploy_path', '/var/www/damienvalade/')
-    ->set('branch', 'feature')
+    ->set('branch', 'feature/cd')
     ->set('composer_options', '--verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader')
     ->set('ssh_multiplexing', true)
     ->set('environment', 'dev')
     ->set('git_ssh_command', 'ssh')
 ;
-
-// Run migrations before enabling the release
-before('deploy:symlink', 'database:migrate');
 
 // Unlock deployer when deployment fails
 after('deploy:failed', 'deploy:unlock');

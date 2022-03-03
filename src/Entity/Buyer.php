@@ -13,7 +13,7 @@ class Buyer extends User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @var ArrayCollection<Note>

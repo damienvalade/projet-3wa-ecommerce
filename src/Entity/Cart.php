@@ -13,7 +13,7 @@ class Cart
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\OneToOne(targetEntity: Buyer::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
