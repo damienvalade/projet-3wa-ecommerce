@@ -33,5 +33,13 @@ host('dev')
     ->set('git_ssh_command', 'ssh')
 ;
 
+task('schema:update', function() {
+    cd('{{release_path}}');
+    run('{{bin/console}} d:s:u -f');
+    run('{{bin/console}} d:f:l');
+});
+
+before('deploy:symlink', 'schema:update');
+
 // Unlock deployer when deployment fails
 after('deploy:failed', 'deploy:unlock');
