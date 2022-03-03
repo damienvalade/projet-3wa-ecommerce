@@ -22,10 +22,6 @@ set('writable_dirs', [
     'var'
 ]);
 
-set('shared_files', [
-    '.htaccess'
-]);
-
 host('dev')
     ->set('hostname', '51.254.32.246')
     ->set('remote_user', 'damienv')
