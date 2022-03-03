@@ -45,11 +45,7 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
-     /**
-      * @return Articles[] Returns an array of Article objects
-      */
-
-    public function findLastArticleUploaded()
+    public function findLastArticleUploaded(): array
     {
         return $this->createQueryBuilder('a')
             ->orderBy('a.id', 'Desc')
@@ -58,7 +54,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    
+
 
     /*
     public function findOneBySomeField($value): ?Article

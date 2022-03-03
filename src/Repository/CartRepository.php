@@ -22,10 +22,6 @@ class CartRepository extends ServiceEntityRepository
         parent::__construct($registry, Cart::class);
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
     public function add(Cart $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
@@ -34,10 +30,6 @@ class CartRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
     public function remove(Cart $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
@@ -46,20 +38,16 @@ class CartRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-      * @return Cart[] Returns an array of Cart objects
-     */
-
-    public function findUserCart(Buyer $buyer)
+    public function findUserCart(Buyer $buyer): ?Cart
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.buyer = :val')
             ->setParameter('val', $buyer)
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+            ;
     }
-    
+
 
     /*
     public function findOneBySomeField($value): ?Cart

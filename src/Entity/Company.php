@@ -17,28 +17,31 @@ class Company
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private string $name;
 
     #[ORM\Column(type: 'text')]
-    private $address;
+    private string $address;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $siret;
+    private string $siret;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $iban;
+    private string $iban;
 
     #[ORM\Column(type: 'text')]
-    private $description;
+    private string $description;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $profilePicture;
+    private ?string $profilePicture;
 
+    /**
+     * @var ArrayCollection<Vendor>
+     */
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Vendor::class)]
-    private $vendors;
+    private Collection $vendors;
 
     public function __construct()
     {
@@ -153,10 +156,10 @@ class Company
     }
 
     #[Assert\Callback]
-    public function validateName(ExecutionContextInterface $context, $payload)
+    public function validateName(ExecutionContextInterface $context, array $payload): void
     {
         // check if the name is actually a fake name
-        if (strtolower($this->getName()) === self::FORBIDDEN_NAME) {
+        if ($this->getName() && strtolower($this->getName()) === self::FORBIDDEN_NAME) {
             $context->buildViolation("You cannot name it '{$this->getName()}'. It's us...")
                 ->atPath('name')
                 ->addViolation();
