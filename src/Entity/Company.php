@@ -6,10 +6,14 @@ use App\Repository\CompanyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 class Company
 {
+    public const FORBIDDEN_NAME = "shopie";
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -146,5 +150,16 @@ class Company
         }
 
         return $this;
+    }
+
+    #[Assert\Callback]
+    public function validateName(ExecutionContextInterface $context, $payload)
+    {
+        // check if the name is actually a fake name
+        if (strtolower($this->getName()) === self::FORBIDDEN_NAME) {
+            $context->buildViolation("You cannot name it '{$this->getName()}'. It's us...")
+                ->atPath('name')
+                ->addViolation();
+        }
     }
 }
