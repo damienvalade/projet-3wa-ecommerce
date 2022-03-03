@@ -4,7 +4,6 @@ namespace Deployer;
 require 'recipe/symfony.php';
 
 // Config
-
 define('APP_NAME', 'Shoppy');
 
 // Git repository
