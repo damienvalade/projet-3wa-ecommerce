@@ -109,4 +109,5 @@ jobs:
         with:
           deployer-version: "7.0.0-rc.3"
           private-key: ${{ secrets.DEV_PRIVATE_KEY }}
+          known-hosts: ${{ secrets.GH_KNOWN_HOSTS }}
           dep: deploy dev
