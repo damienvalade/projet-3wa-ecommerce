@@ -23,10 +23,10 @@ set('writable_dirs', [
 ]);
 
 host('dev')
-    ->set('hostname', 'sc4damienv.universe.wf')
-    ->set('remote_user', 'sc4damienv')
-    ->set('deploy_path', '~/sc4damienv')
-    ->set('branch', 'main')
+    ->set('hostname', '51.254.32.246')
+    ->set('remote_user', 'damienv')
+    ->set('deploy_path', '/var/www/damienvalade/')
+    ->set('branch', 'feature')
     ->set('composer_options', '--verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader')
     ->set('ssh_multiplexing', true)
     ->set('environment', 'dev')
